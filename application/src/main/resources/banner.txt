@@ -1,0 +1,40 @@
+==========================================================
+**********************************************************
+==========================================================
+This is the 'production' version of the patient service.
+
+Get all the patients stored by:
+
+GET /patient
+
+Get a specific patient by email (case sensitive) by using
+
+GET /patient/p1@gmail.com
+
+Add a patient with
+
+POST /patient
+{
+   "firstname":"John",
+   "lastname":"Snow",
+   "email":"p1@gmail.com"
+}
+
+Edit a patient with
+
+PUT /patient/1234
+
+{
+	"firstname":"Johnson",
+    "lastname":"Snowman",
+    "email":"johnsonsnowman@gmail.com"
+}
+
+Delete a patient
+
+DELETE /patient/1234
+
+
+==========================================================
+**********************************************************
+==========================================================

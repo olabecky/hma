@@ -1,0 +1,14 @@
+dependencies {
+	implementation project(':domain')
+
+	implementation 'org.springframework:spring-context'
+	implementation 'jakarta.annotation:jakarta.annotation-api'
+	implementation 'org.springframework.data:spring-data-jpa'
+	implementation 'org.springframework.boot:spring-boot'
+	implementation 'org.springframework.boot:spring-boot-autoconfigure'
+	implementation 'com.h2database:h2:'
+	implementation 'org.hibernate:hibernate-core'
+
+	testImplementation 'org.springframework:spring-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

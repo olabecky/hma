@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="com.rightmove.tools.logging" monitorInterval="60">
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT" ignoreExceptions="false">
+			<PatternLayout
+					pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss.SSS} -- %-5p -- %40.40logger{1.} [%t] -- %m%n}{STYLE=Default}"/>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="INFO">
+			<AppenderRef ref="STDOUT"/>
+		</Root>
+		<Logger name="FailedMisMessage" level="INFO" additivity="false">
+			<AppenderRef ref="STDOUT"/>
+		</Logger>
+		<!-- Prevent filling the console with metrics during development -->
+		<Logger name="com.rightmove.tools.micrometer.registry.log4j2.Log4j2MeterRegistry"
+				level="WARN"
+				additivity="false">
+			<AppenderRef ref="STDOUT"/>
+		</Logger>
+	</Loggers>
+</Configuration>

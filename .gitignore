@@ -1,0 +1,11 @@
+.idea/**/*
+location-search.iml
+.gradle/**/*
+**/build/**/*
+**/build-info.properties
+**/out/**/*
+**/logs/**/*
+application/application.properties
+cdc-provider/application.properties
+**/.DS_Store
+cdc-test/target/**/*

@@ -1,0 +1,49 @@
+allprojects {
+	group = 'com.rightmove'
+	version = '1.0.0-SNAPSHOT'
+
+	apply plugin: "java"
+
+	sourceCompatibility = 11
+	targetCompatibility = 11
+
+	tasks.withType(GroovyCompile) {
+		groovyOptions.encoding = "UTF-8"
+	}
+
+	tasks.withType(JavaCompile) {
+		options.encoding = "UTF-8"
+	}
+
+	tasks.withType(ScalaCompile) {
+		targetCompatibility = "1.8"
+	}
+
+	repositories {
+		mavenLocal()
+//		maven { url "http://nexus.rightmove.com/content/groups/public" }
+		mavenCentral()
+	}
+
+	configurations.all {
+		// the below dependency pulls in logback and conflicts with log4j that we are using so we need to exclude it
+		exclude module: 'spring-boot-starter-logging'
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'groovy'
+
+	compileJava.options.encoding = 'UTF-8'
+
+	test {
+		useJUnitPlatform()
+	}
+
+	dependencies {
+		implementation enforcedPlatform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+		implementation "org.springframework.boot:spring-boot-starter-log4j2"
+	}
+}

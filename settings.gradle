@@ -1,0 +1,18 @@
+pluginManagement {
+	plugins {
+		id 'com.rightmove.pact' version "${pactGradlePluginVersion}"
+		id 'au.com.dius.pact' version "${pactJvmVersion}"
+		id 'org.springframework.boot' version "${springBootVersion}"
+	}
+	repositories {
+		mavenLocal()
+//		maven { url 'http://nexus.rightmove.com/content/groups/public' }
+		gradlePluginPortal()
+	}
+}
+
+include 'application'
+include 'domain'
+include 'service'
+include 'web'
+//include 'cdc-provider'
