@@ -1,10 +1,14 @@
-# CDC-Provider-Workshop
-
-This is a companion project to the [CDC-consumer-workshop](https://git.rightmove.com/projects/TRAIN/repos/cdc-consumer-workshop/browse).
+# Hospital Management Platform
 
 ## Starting the application
 
 From the command line, run: `./gradlew application:bootRun` from the project root. Alternatively, from IntelliJ you can open the Gradle sidebar and locate the bootRun task under 
+
+## Accessing the application
+http://localhost:9992
+
+From the command line, run: `./gradlew application:bootRun` from the project root. Alternatively, from IntelliJ you can open the Gradle sidebar and locate the bootRun task under
+
 
 application -> Tasks -> application
 
@@ -14,7 +18,7 @@ When the application starts it spins up an in memory database called H2. Note th
 
 You can connect and query the db via the h2 tool in the browser once the application is running.
 
-This tool will be found at: http://localhost:9995/h2-console
+This tool will be found at: http://localhost:9992/h2-console
 
 Upon arriving at the login page
 
