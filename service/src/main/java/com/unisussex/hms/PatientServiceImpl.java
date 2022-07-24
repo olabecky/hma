@@ -9,13 +9,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class HibernatePatientService implements PatientService{
+public class PatientServiceImpl implements PatientService{
 
     private final PatientDao patientDao;
     private final EntityPatientConverter entityPatientConverter;
 
-    public HibernatePatientService(PatientDao patientDao,
-                                     EntityPatientConverter entityPatientConverter) {
+    public PatientServiceImpl(PatientDao patientDao,
+                              EntityPatientConverter entityPatientConverter) {
         this.patientDao = patientDao;
         this.entityPatientConverter = entityPatientConverter;
     }

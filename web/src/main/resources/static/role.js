@@ -1,10 +1,10 @@
 (() => {
     document.addEventListener("DOMContentLoaded", () => {
 
-        showHeroes();
+        showRoles('role');
 
-        function showHeroes() {
-            fetch('hero')
+        function showRoles(path) {
+            fetch(path)
                 .then( function(response) {
                     response.json().then(function(data) {
                         if (response.status === 200) {
@@ -17,26 +17,37 @@
                 })
         }
 
+        document.getElementById('search-form').addEventListener("click", () => {
+            var form = document.getElementById('searchForm')
+            var errorElement = document.getElementById('errorMessage')
+            var param = document.getElementById('search').value
+            errorElement.innerHTML = '';
+            var path = 'roleSearch?param='+param;
+            showRoles(path);
+        })
+
         document.getElementById('submit-form').addEventListener("click", () => {
-            var form = document.getElementById('addHero')
+            var form = document.getElementById('addRole')
             var errorElement = document.getElementById('errorMessage')
             errorElement.innerHTML = '';
-            fetch('hero', {
+            fetch('role', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(getFormContentAsObject('addHero')),
+                body: JSON.stringify(getFormContentAsObject('addRole')),
             })
                 .then(function (response) {
                     response.json()
                         .then(function (data) {
-                            if (response.status !== 200) {
+                            if (response.status !== 201) {
                                 var errorElement = document.getElementById('errorMessage')
                                 errorElement.innerHTML = `<div>Request failed: ${data.message}</div>`;
+                            }else{
+                                form.reset();
                             }
-                            showHeroes();
+                            showRoles('role');
                         }).catch(function (error) {
                         var errorElement = document.getElementById('errorMessage')
                         showHeroes();
@@ -45,7 +56,7 @@
                 })
                 .catch(function (error) {
                     var errorElement = document.getElementById('errorMessage')
-                    showHeroes();
+                    showRoles('role');
                     errorElement.innerHTML = `<div>Request failed: ${error}</div>`;
                 });
         })
@@ -55,16 +66,18 @@
             var obj ={};
             for(var i = 0 ; i < elements.length ; i++){
                 var item = elements.item(i);
-                obj[item.name] = item.value;
+                obj[item.id] = item.value;
             }
             return obj;
         }
 
         function updateTable(data) {
-            var table = document.getElementById('allHeroes')
-            var rows = "<th>Name</th><th>Alias</th>"
+            var table = document.getElementById('allRoles')
+            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Name</th><th scope=\"col\">Description</th></tr></thead>"
+            let sn = 1;
             data.forEach(element => {
-                rows += `<tr><td>${element.name}</td><td>${element.alias}</td></tr>`;
+                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.name}</td><td>${element.description}</td></tr>`;
+                sn++;
             });
             table.innerHTML = rows;
         }

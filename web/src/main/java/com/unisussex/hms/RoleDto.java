@@ -4,18 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-@JsonDeserialize(builder = SuperHeroDto.Builder.class)
-public class SuperHeroDto {
+@JsonDeserialize(builder = RoleDto.Builder.class)
+public class RoleDto {
 
 	private final Long id;
 	private final String name;
-	private final String secretIdentity;
-	private final String newField = "this is a test";
+	private final String description;
 
-	private SuperHeroDto(Builder builder) {
+	private RoleDto(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;
-		this.secretIdentity = builder.secretIdentity;
+		this.description = builder.description;
 	}
 
 	public Long getId() {
@@ -26,15 +25,11 @@ public class SuperHeroDto {
 		return name;
 	}
 
-	public String getSecretIdentity() {
-		return secretIdentity;
+	public String getDescription() {
+		return description;
 	}
 
-	public String getNewField() {
-		return newField;
-	}
-
-	public static Builder aSuperHeroDto() {
+	public static Builder aRoleDto() {
 		return new Builder();
 	}
 
@@ -43,7 +38,7 @@ public class SuperHeroDto {
 	public static final class Builder {
 		private Long id;
 		private String name;
-		private String secretIdentity;
+		private String description;
 
 		private Builder() {
 		}
@@ -58,13 +53,13 @@ public class SuperHeroDto {
 			return this;
 		}
 
-		public Builder secretIdentity(String secretIdentity) {
-			this.secretIdentity = secretIdentity;
+		public Builder description(String description) {
+			this.description = description;
 			return this;
 		}
 
-		public SuperHeroDto build() {
-			return new SuperHeroDto(this);
+		public RoleDto build() {
+			return new RoleDto(this);
 		}
 	}
 }

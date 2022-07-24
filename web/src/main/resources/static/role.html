@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hospital Management Platform - Welcome</title>
+	<title>Hospital Management Platform - Roles</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,6 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="style.css" />
+	<script type="text/javascript" src="role.js"></script>
 </head>
 <body>
 <div align="center">
@@ -20,7 +21,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
@@ -41,13 +42,37 @@
 					<a class="nav-link disabled" href="#">Disabled</a>
 				</li>
 			</ul>
+			<form id="searchForm" class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
+			</form>
+			<button id="search-form" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</div>
 	</nav>
-	<h1>Hospital Management Platform - Welcome</h1>
+	<h1>Hospital Management Platform - Roles</h1>
 	<div>
-
+		<form id="addRole">
+			<div class="form-group row">
+				<label for="name" class="col-sm-2 col-form-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter role name">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="description" class="col-sm-2 col-form-label">Description</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="description" aria-describedby="descriptionHelp" placeholder="Enter description">
+				</div>
+			</div>
+		</form>
+		<button type="submit" id="submit-form">Submit</button>
 	</div>
 
+	<table class="table table-striped" id="allRoles">
+
+	</table>
+
+
+	<div id="errorMessage"/>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS-->
