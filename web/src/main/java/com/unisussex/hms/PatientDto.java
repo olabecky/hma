@@ -11,11 +11,16 @@ public class PatientDto {
     private final String lastname;
     private final String email;
 
+    private final String address;
+    public final String phoneNumber;
+
     public PatientDto(Builder builder) {
         this.id = builder.id;
         this.firstname = builder.firstname;
         this.lastname = builder.lastname;
         this.email = builder.email;
+        this.address = builder.address;
+        this.phoneNumber = builder.phoneNumber;
     }
 
     public Long getId() {
@@ -34,6 +39,9 @@ public class PatientDto {
         return email;
     }
 
+    public String getAddress() { return address;}
+    public String getPhoneNumber(){return  phoneNumber;}
+
     public static Builder aPatientDto() {
         return new Builder();
     }
@@ -45,6 +53,8 @@ public class PatientDto {
         private String firstname;
         private String lastname;
         private String email;
+        private String address;
+        private String phoneNumber;
 
         private Builder() {
         }
@@ -69,6 +79,16 @@ public class PatientDto {
             return this;
         }
 
+        public Builder address(String address){
+            this.address = address;
+            return this;
+        }
+
+        public Builder phoneNumber(String phoneNumber){
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
         public PatientDto build() {
             return new PatientDto(this);
         }
@@ -81,6 +101,8 @@ public class PatientDto {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

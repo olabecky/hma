@@ -64,11 +64,25 @@ public class PatientController {
             throw new IllegalArgumentException("Lastname was empty/null.");
         }
 
+        if (Strings.isBlank(patientDto.getEmail())) {
+            throw new IllegalArgumentException("Email was empty/null.");
+        }
+
+        if (Strings.isBlank(patientDto.getPhoneNumber())) {
+            throw new IllegalArgumentException("Phone number was empty/null.");
+        }
+
+        if (Strings.isBlank(patientDto.getAddress())) {
+            throw new IllegalArgumentException("Address was empty/null.");
+        }
+
         Patient createdPatient = this.patientService.savePatient(Patient.aPatient()
                 .id(patientDto.getId())
                 .firstname(patientDto.getFirstname())
                 .lastname(patientDto.getLastname())
                 .email(patientDto.getEmail())
+                .phoneNumber(patientDto.getPhoneNumber())
+                .address(patientDto.getAddress())
                 .build());
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -90,11 +104,21 @@ public class PatientController {
             throw new IllegalArgumentException("Email was empty/null.");
         }
 
+        if (Strings.isBlank(patient.getPhoneNumber())) {
+            throw new IllegalArgumentException("Phone number was empty/null.");
+        }
+
+        if (Strings.isBlank(patient.getAddress())) {
+            throw new IllegalArgumentException("Address was empty/null.");
+        }
+
         Patient createdPatient = this.patientService.updatePatient(Patient.aPatient()
                 .id(id)
                 .firstname(patient.getFirstname())
                 .lastname(patient.getLastname())
                 .email(patient.getEmail())
+                .phoneNumber(patient.getPhoneNumber())
+                .address(patient.getAddress())
                 .build());
 
         return ResponseEntity.status(HttpStatus.OK)
@@ -113,6 +137,8 @@ public class PatientController {
                 .firstname(patient.getFirstname())
                 .lastname(patient.getLastname())
                 .email(patient.getEmail())
+                .phoneNumber(patient.getPhoneNumber())
+                .address(patient.getAddress())
                 .build();
     }
 

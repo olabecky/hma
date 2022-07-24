@@ -6,12 +6,17 @@ public class Patient {
     private final String lastname;
     private final String email;
 
+    private final String address;
+    private final String phoneNumber;
+
 
     public Patient(Builder builder) {
         this.id = builder.id;
         this.firstname = builder.firstname;
         this.lastname = builder.lastname;
         this.email = builder.email;
+        this.address = builder.address;
+        this.phoneNumber = builder.phoneNumber;
     }
 
     public Long getId() {
@@ -30,6 +35,10 @@ public class Patient {
         return email;
     }
 
+    public String getAddress(){return address;};
+
+    public String getPhoneNumber(){return phoneNumber;}
+
     public static Builder aPatient() {
         return new Builder();
     }
@@ -39,6 +48,8 @@ public class Patient {
         private String firstname;
         private String lastname;
         private String email;
+        private String address;
+        private String phoneNumber;
 
         private Builder() {
         }
@@ -62,6 +73,17 @@ public class Patient {
             this.email = email;
             return this;
         }
+
+        public Builder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
 
         public Patient build() {
             return new Patient(this);
