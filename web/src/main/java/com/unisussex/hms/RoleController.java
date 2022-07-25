@@ -22,7 +22,7 @@ public class RoleController {
 	}
 
 	@GetMapping(value = "/role")
-	public List<RoleDto> getAllSuperheroes() {
+	public List<RoleDto> getAllRoles() {
 
 		return this.roleService.getAllRoles().stream()
 				.map(this::convert)
@@ -30,10 +30,10 @@ public class RoleController {
 	}
 
 	@GetMapping("/role/{name}")
-	public RoleDto getHeroByName(@PathVariable("name") String name) {
+	public RoleDto getRoleByName(@PathVariable("name") String name) {
 		return this.roleService.getRoleByName(name)
 				.map(this::convert)
-				.orElseThrow(() -> new ResourceNotFoundException("Not superhero with name '" + name + "'"));
+				.orElseThrow(() -> new ResourceNotFoundException("No role with name '" + name + "'"));
 	}
 
 	@GetMapping("/roleSearch")
@@ -49,50 +49,50 @@ public class RoleController {
 	}
 
 	@PostMapping(value = "/role")
-	public ResponseEntity<RoleDto> saveSuperhero(@RequestBody RoleDto superhero) {
+	public ResponseEntity<RoleDto> saveRole(@RequestBody RoleDto role) {
 
-		if (superhero.getId() != null) {
-			throw new IllegalArgumentException("To update an existing hero you should be performing a PUT. To create a hero, remove the ID as an ID will be assigned at creation.");
+		if (role.getId() != null) {
+			throw new IllegalArgumentException("To update an existing role you should be performing a PUT. To create a role, remove the ID as an ID will be assigned at creation.");
 		}
 
-		if (Strings.isBlank(superhero.getName())) {
+		if (Strings.isBlank(role.getName())) {
 			throw new IllegalArgumentException("Name was empty/null.");
 		}
 
-		Role createdHero = this.roleService.saveRole(Role.aRole()
-				.id(superhero.getId())
-				.name(superhero.getName())
-				.description(superhero.getDescription())
+		Role createdRole = this.roleService.saveRole(Role.aRole()
+				.id(role.getId())
+				.name(role.getName())
+				.description(role.getDescription())
 				.build());
 
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(convert(createdHero));
+				.body(convert(createdRole));
 	}
 
 	@PutMapping(value = "/role/{id}")
-	public ResponseEntity<RoleDto> updateSuperhero(@PathVariable("id") long id, @RequestBody RoleDto superhero) {
+	public ResponseEntity<RoleDto> updateRole(@PathVariable("id") long id, @RequestBody RoleDto roleDto) {
 
-		if (Strings.isBlank(superhero.getName())) {
+		if (Strings.isBlank(roleDto.getName())) {
 			throw new IllegalArgumentException("Name was empty/null.");
 		}
 
-		if (Strings.isBlank(superhero.getDescription())) {
+		if (Strings.isBlank(roleDto.getDescription())) {
 			throw new IllegalArgumentException("Description was empty/null.");
 		}
 
-		Role createdHero = this.roleService.updateRole(Role.aRole()
+		Role updatedRole = this.roleService.updateRole(Role.aRole()
 				.id(id)
-				.name(superhero.getName())
-				.description(superhero.getDescription())
+				.name(roleDto.getName())
+				.description(roleDto.getDescription())
 				.build());
 
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(convert(createdHero));
+				.body(convert(updatedRole));
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping(value = "/role/{id}")
-	public void deleteHero(@PathVariable("id") long id) {
+	public void deleteRole(@PathVariable("id") long id) {
 		this.roleService.delete(id);
 	}
 

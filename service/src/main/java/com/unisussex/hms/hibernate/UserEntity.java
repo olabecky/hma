@@ -1,0 +1,41 @@
+package com.unisussex.hms.hibernate;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "USER")
+public class UserEntity {
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SEQ_ROLE")
+    @SequenceGenerator(name = "SEQ_ROLE", sequenceName = "SEQ_ROLE", allocationSize = 1)
+    private Long id;
+    private String username;
+    private String role;
+
+    public UserEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+}
