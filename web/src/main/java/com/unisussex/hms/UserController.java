@@ -60,14 +60,14 @@ public class UserController {
 			throw new IllegalArgumentException("Username was empty/null.");
 		}
 
-		if (Strings.isBlank(userDto.getRole())) {
+		if (userDto.getRoleId() == null) {
 			throw new IllegalArgumentException("Role was empty/null.");
 		}
 
 		User createdUser = this.userService.saveUser(User.aUser()
 				.id(userDto.getId())
 				.username(userDto.getUsername())
-				.role(userDto.getRole())
+				.role(Role.aRole().id(userDto.getRoleId()).build())
 				.build());
 
 		return ResponseEntity.status(HttpStatus.CREATED)
@@ -81,14 +81,14 @@ public class UserController {
 			throw new IllegalArgumentException("Username was empty/null.");
 		}
 
-		if (Strings.isBlank(userDto.getRole())) {
+		if (userDto.getRoleId() == null) {
 			throw new IllegalArgumentException("Role was empty/null.");
 		}
 
 		User createdUser = this.userService.updateUser(User.aUser()
 				.id(id)
 				.username(userDto.getUsername())
-				.role(userDto.getRole())
+				.role(Role.aRole().id(userDto.getRoleId()).build())
 				.build());
 
 		return ResponseEntity.status(HttpStatus.OK)
@@ -106,7 +106,7 @@ public class UserController {
 		return UserDto.aUserDto()
 				.id(user.getId())
 				.username(user.getUsername())
-				.role(user.getRole())
+				.role(Role.aRole().id(user.getRole().getId()).name(user.getRole().getName()).description(user.getRole().getDescription()).build())
 				.build();
 	}
 

@@ -16,6 +16,10 @@ public class RoleEntity {
 	public RoleEntity() {
 	}
 
+	public RoleEntity(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

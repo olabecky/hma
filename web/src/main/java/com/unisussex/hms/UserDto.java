@@ -8,12 +8,14 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class UserDto {
     private final Long id;
     private final String username;
-    private final String role;
+    private final Role role;
+    private final Long roleId;
 
     public UserDto(Builder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.role = builder.role;
+        this.roleId = builder.roleId;
     }
 
     public Long getId() {
@@ -24,8 +26,12 @@ public class UserDto {
         return username;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
+    }
+
+    public Long getRoleId() {
+        return roleId;
     }
 
     public static Builder aUserDto() {
@@ -38,21 +44,26 @@ public class UserDto {
     public static final class Builder {
         private Long id;
         private String username;
-        private String role;
+        private Role role;
+        private Long roleId;
 
         private Builder() {
         }
 
-        public UserDto.Builder id(Long id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }
-        public UserDto.Builder username(String username ) {
+        public Builder username(String username ) {
             this.username = username;
             return this;
         }
-        public UserDto.Builder role(String role) {
+        public Builder role(Role role) {
             this.role = role;
+            return this;
+        }
+        public Builder roleId(Long roleId) {
+            this.roleId = roleId;
             return this;
         }
 
@@ -66,7 +77,8 @@ public class UserDto {
         return "UserDto{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
+                ", role=" + role +
+                ", roleId=" + roleId +
                 '}';
     }
 }

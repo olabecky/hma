@@ -5,7 +5,7 @@ package com.unisussex.hms;
 public class User {
     private final Long id;
     private final String username;
-    private final String role;
+    private final Role role;
 
     private User(Builder builder) {
         this.id = builder.id;
@@ -21,7 +21,7 @@ public class User {
         return username;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -32,7 +32,7 @@ public class User {
     public static final class Builder {
         private Long id;
         private String username;
-        private String role;
+        private Role role;
 
         private Builder() {
         }
@@ -47,7 +47,7 @@ public class User {
             return this;
         }
 
-        public Builder role(String role) {
+        public Builder role(Role role) {
             this.role = role;
             return this;
         }

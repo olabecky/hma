@@ -50,7 +50,7 @@
                             showRoles('role');
                         }).catch(function (error) {
                         var errorElement = document.getElementById('errorMessage')
-                        showHeroes();
+                        showRoles('role');
                         errorElement.innerHTML = `<div>Error occurred: ${error}</div>`;
                     });
                 })

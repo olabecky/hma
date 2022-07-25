@@ -1,5 +1,7 @@
 package com.unisussex.hms;
 
+import com.unisussex.hms.hibernate.RoleDao;
+import com.unisussex.hms.hibernate.RoleEntity;
 import com.unisussex.hms.hibernate.UserDao;
 import com.unisussex.hms.hibernate.UserEntity;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
+    private final RoleDao roleDao;
     private final EntityUserConverter entityUserConverter;
 
-    public UserServiceImpl(UserDao userDao, EntityUserConverter entityUserConverter) {
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao, EntityUserConverter entityUserConverter) {
         this.userDao = userDao;
+        this.roleDao = roleDao;
         this.entityUserConverter = entityUserConverter;
     }
 
@@ -61,7 +65,7 @@ public class UserServiceImpl implements UserService {
         } else {
             UserEntity entityInDB = userEntity.get();
             entityInDB.setUsername(user.getUsername());
-            entityInDB.setRole(user.getRole());
+            entityInDB.setRole(roleDao.findById(user.getRole().getId()).get());
 
             entityInDB = userDao.save(entityInDB);
 
