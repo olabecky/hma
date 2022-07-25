@@ -1,9 +1,9 @@
 (() => {
     document.addEventListener("DOMContentLoaded", () => {
 
-        showRoles('user');
+        showUsers('user');
 
-        function showRoles(path) {
+        function showUsers(path) {
             fetch(path)
                 .then( function(response) {
                     response.json().then(function(data) {
@@ -23,14 +23,14 @@
             var param = document.getElementById('search').value
             errorElement.innerHTML = '';
             var path = 'userSearch?param='+param;
-            showRoles(path);
+            showUsers(path);
         })
 
         document.getElementById('submit-form').addEventListener("click", () => {
             var form = document.getElementById('addUser')
             var errorElement = document.getElementById('errorMessage')
             errorElement.innerHTML = '';
-            fetch('role', {
+            fetch('user', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -47,7 +47,7 @@
                             }else{
                                 form.reset();
                             }
-                            showRoles('role');
+                            showUsers('user');
                         }).catch(function (error) {
                         var errorElement = document.getElementById('errorMessage')
                         showHeroes();
@@ -56,7 +56,7 @@
                 })
                 .catch(function (error) {
                     var errorElement = document.getElementById('errorMessage')
-                    showRoles('role');
+                    showUsers('user');
                     errorElement.innerHTML = `<div>Request failed: ${error}</div>`;
                 });
         })
@@ -73,10 +73,10 @@
 
         function updateTable(data) {
             var table = document.getElementById('allRoles')
-            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Username</th><th scope=\"col\">Description</th></tr></thead>"
+            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Username</th><th scope=\"col\">Role</th></tr></thead>"
             let sn = 1;
             data.forEach(element => {
-                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.name}</td><td>${element.description}</td></tr>`;
+                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.username}</td><td>${element.role}</td></tr>`;
                 sn++;
             });
             table.innerHTML = rows;

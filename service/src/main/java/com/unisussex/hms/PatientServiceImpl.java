@@ -47,9 +47,9 @@ public class PatientServiceImpl implements PatientService{
         if(patientDao.findByEmail(patient.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Patient already exists with email: " + patient.getEmail());
         } else {
-            PatientEntity savedHero = patientDao.save(entityPatientConverter.convert(patient));
+            PatientEntity savedPatient = patientDao.save(entityPatientConverter.convert(patient));
 
-            return entityPatientConverter.convert(savedHero);
+            return entityPatientConverter.convert(savedPatient);
         }
     }
 
@@ -75,11 +75,11 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public void savePatients(List<Patient> patients) {
-        List<PatientEntity> superheroEntities = patients.stream()
+        List<PatientEntity> patientEntities = patients.stream()
                 .map(entityPatientConverter::convert)
                 .collect(Collectors.toList());
 
-        patientDao.saveAll(superheroEntities);
+        patientDao.saveAll(patientEntities);
     }
 
     @Override

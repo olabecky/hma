@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface UserDao extends JpaRepository<UserEntity, Long> {
 
-    Optional<RoleEntity> findByUser(String name);
+    Optional<UserEntity> findByUsername(String username);
 
-    @Query("SELECT e FROM UserEntity e WHERE lower(e.name) like :param or lower(e.role) like :param")
+    @Query("SELECT e FROM UserEntity e WHERE lower(e.username) like :param or lower(e.role) like :param")
     List<UserEntity> findByParam(@Param("param") String param);
 }

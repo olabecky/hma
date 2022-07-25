@@ -127,7 +127,7 @@ public class PatientController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/patient/{id}")
-    public void deleteHero(@PathVariable("id") long id) {
+    public void deletePatient(@PathVariable("id") long id) {
         this.patientService.delete(id);
     }
 

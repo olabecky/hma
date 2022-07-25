@@ -1,8 +1,10 @@
 package com.unisussex.hms;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+@JsonDeserialize(builder = UserDto.Builder.class)
 public class UserDto {
     private final Long id;
     private final String username;
@@ -14,9 +16,23 @@ public class UserDto {
         this.role = builder.role;
     }
 
-    public static UserDto.Builder aPatientDto() {
-        return new UserDto.Builder();
+    public Long getId() {
+        return id;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public static Builder aUserDto() {
+        return new Builder();
+    }
+
+
     @JsonPOJOBuilder(withPrefix = "")
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
@@ -43,22 +59,6 @@ public class UserDto {
         public UserDto build() {
             return new UserDto(this);
         }
-    }
-
-    public static UserDto.Builder aUserDto() {
-        return new UserDto.Builder();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getRole() {
-        return role;
     }
 
     @Override

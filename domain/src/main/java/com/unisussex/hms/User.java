@@ -7,10 +7,26 @@ public class User {
     private final String username;
     private final String role;
 
-    private User(User.Builder builder) {
+    private User(Builder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.role = builder.role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public static Builder aUser() {
+        return new Builder();
     }
 
     public static final class Builder {
@@ -21,17 +37,17 @@ public class User {
         private Builder() {
         }
 
-        public User.Builder id(Long id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }
 
-        public User.Builder username(String username) {
+        public Builder username(String username) {
             this.username = username;
             return this;
         }
 
-        public User.Builder role(String role) {
+        public Builder role(String role) {
             this.role = role;
             return this;
         }
@@ -40,18 +56,5 @@ public class User {
             return new User(this);
         }
 
-
-        public Long getId() {
-            return id;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public String getRole() {
-            return role;
-        }
-
-
-    }}
+    }
+}

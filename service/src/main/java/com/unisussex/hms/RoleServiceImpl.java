@@ -47,20 +47,20 @@ public class RoleServiceImpl implements RoleService {
 		if(roleDao.findByName(role.getName()).isPresent()) {
 			throw new IllegalArgumentException("Role already exists with name: " + role.getName());
 		} else {
-			RoleEntity savedHero = roleDao.save(entityRoleConverter.convert(role));
+			RoleEntity savedRole = roleDao.save(entityRoleConverter.convert(role));
 
-			return entityRoleConverter.convert(savedHero);
+			return entityRoleConverter.convert(savedRole);
 		}
 	}
 
 	@Override
 	public Role updateRole(Role role) {
-		Optional<RoleEntity> superheroEntity = roleDao.findById(role.getId());
+		Optional<RoleEntity> roleEntity = roleDao.findById(role.getId());
 
-		if(superheroEntity.isEmpty()) {
+		if(roleEntity.isEmpty()) {
 			throw new IllegalArgumentException("No Role exists with id: " + role.getId());
 		} else {
-			RoleEntity entityInDB = superheroEntity.get();
+			RoleEntity entityInDB = roleEntity.get();
 			entityInDB.setName(role.getName());
 			entityInDB.setDescription(role.getDescription());
 
@@ -72,11 +72,11 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public void saveRoless(List<Role> roles) {
-		List<RoleEntity> superheroEntities = roles.stream()
+		List<RoleEntity> roleEntities = roles.stream()
 				.map(entityRoleConverter::convert)
 				.collect(Collectors.toList());
 
-		roleDao.saveAll(superheroEntities);
+		roleDao.saveAll(roleEntities);
 	}
 
 	@Override

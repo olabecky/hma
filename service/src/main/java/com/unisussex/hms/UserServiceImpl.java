@@ -1,32 +1,31 @@
 package com.unisussex.hms;
 
-import com.unisussex.hms.hibernate.RoleEntity;
 import com.unisussex.hms.hibernate.UserDao;
 import com.unisussex.hms.hibernate.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
-    private final EntityRoleConverter entityRoleConverter;
+    private final EntityUserConverter entityUserConverter;
 
-    public UserServiceImpl(UserDao userDao, EntityRoleConverter entityRoleConverter) {
+    public UserServiceImpl(UserDao userDao, EntityUserConverter entityUserConverter) {
         this.userDao = userDao;
-        this.entityRoleConverter = entityRoleConverter;
+        this.entityUserConverter = entityUserConverter;
     }
 
     @Override
     public User saveUser(User user) {
-        if(userDao.findByUser(user.getUsername()).isPresent()) {
+        if(userDao.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalArgumentException("User already exists with name: " + user.getUsername());
         } else {
-            UserEntity savedUser = userDao.save(entityRoleConverter.convert(user));
-
-            return entityRoleConverter.convert(savedUser);
+            UserEntity savedUser = userDao.save(entityUserConverter.convert(user));
+            return entityUserConverter.convert(savedUser);
         }
     }
 
@@ -34,10 +33,59 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userDao.findAll()
                 .stream()
-                .map(entityRoleConverter::convert)
+                .map(entityUserConverter::convert)
                 .collect(Collectors.toList());
 
     }
 
+    @Override
+    public Optional<User> getUserByUsername(String username) {
+        return userDao.findByUsername(username)
+                .map(entityUserConverter::convert);
+    }
+
+    @Override
+    public List<User> getUsersByUsernameOrRole(String param) {
+        return userDao.findByParam(param)
+                .stream()
+                .map(entityUserConverter::convert)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public User updateUser(User user) {
+        Optional<UserEntity> userEntity = userDao.findById(user.getId());
+
+        if(userEntity.isEmpty()) {
+            throw new IllegalArgumentException("No User exists with id: " + user.getId());
+        } else {
+            UserEntity entityInDB = userEntity.get();
+            entityInDB.setUsername(user.getUsername());
+            entityInDB.setRole(user.getRole());
+
+            entityInDB = userDao.save(entityInDB);
+
+            return entityUserConverter.convert(entityInDB);
+        }
+    }
+
+    @Override
+    public void saveUsers(List<User> users) {
+        List<UserEntity> userEntities = users.stream()
+                .map(entityUserConverter::convert)
+                .collect(Collectors.toList());
+
+        userDao.saveAll(userEntities);
+    }
+
+    @Override
+    public void delete(long id) {
+        userDao.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        userDao.deleteAll();
+    }
 
 }
