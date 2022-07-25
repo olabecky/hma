@@ -15,9 +15,9 @@ public class UserConverter {
 
     public UserEntity convert(User user) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setId(user.getId);
-        userEntity.setUsername(user.getUserName());
-        userEntity.setRole(user.Role());
+        userEntity.setId(user.getId());
+        userEntity.setUsername(user.getUsername());
+        userEntity.setRole(user.getRole());
 
         return userEntity;
     }
