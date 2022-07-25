@@ -36,7 +36,7 @@
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(getFormContentAsObject('addRole')),
+                body: JSON.stringify(getFormContentAsObject('addUser')),
             })
                 .then(function (response) {
                     response.json()
@@ -50,7 +50,7 @@
                             showUsers('user');
                         }).catch(function (error) {
                         var errorElement = document.getElementById('errorMessage')
-                        showHeroes();
+                        showUsers('user');
                         errorElement.innerHTML = `<div>Error occurred: ${error}</div>`;
                     });
                 })
@@ -72,14 +72,36 @@
         }
 
         function updateTable(data) {
-            var table = document.getElementById('allRoles')
+            var table = document.getElementById('allUsers')
             var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Username</th><th scope=\"col\">Role</th></tr></thead>"
             let sn = 1;
             data.forEach(element => {
-                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.username}</td><td>${element.role}</td></tr>`;
+                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.username}</td><td>${element.role.name}</td></tr>`;
                 sn++;
             });
             table.innerHTML = rows;
         }
+
+        function loadRoles(path) {
+             fetch(path)
+                 .then( function(response) {
+                     response.json().then(function(data) {
+                         if (response.status === 200) {
+                             let $select = $('#roleId');
+                                 $.each(data, function(i, option) {
+                                     let optionText = option.name;
+                                     let optionValue = option.id;
+                                     $select.append(`<option value="${optionValue}"> ${optionText} </option>`);
+                                 });
+                         } else {
+                             var errorElement = document.getElementById('errorMessage')
+                             errorElement.innerHTML = `<div>Request failed: ${data.message}</div>`;
+                         }
+                 })
+             })
+         }
+         loadRoles('role');
+
+//        $(".select2").select2();
     });
 })();

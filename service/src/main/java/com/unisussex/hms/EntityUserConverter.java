@@ -1,5 +1,6 @@
 package com.unisussex.hms;
 
+import com.unisussex.hms.hibernate.RoleEntity;
 import com.unisussex.hms.hibernate.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,7 @@ public class EntityUserConverter {
         return User.aUser()
                 .id(entity.getId())
                 .username(entity.getUsername())
-                .role(entity.getRole())
+                .role(Role.aRole().id(entity.getRole().getId()).name(entity.getRole().getName()).description(entity.getRole().getDescription()).build())
                 .build();
     }
 
@@ -17,7 +18,7 @@ public class EntityUserConverter {
         UserEntity roleEntity = new UserEntity();
         roleEntity.setId(user.getId());
         roleEntity.setUsername(user.getUsername());
-        roleEntity.setRole(user.getRole());
+        roleEntity.setRole(new RoleEntity(user.getRole().getId()));
 
         return roleEntity;
     }

@@ -10,7 +10,9 @@ public class UserEntity {
     @SequenceGenerator(name = "SEQ_ROLE", sequenceName = "SEQ_ROLE", allocationSize = 1)
     private Long id;
     private String username;
-    private String role;
+    @ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "id")
+    private RoleEntity role;
 
     public UserEntity() {
     }
@@ -31,11 +33,11 @@ public class UserEntity {
         this.username = username;
     }
 
-    public String getRole() {
+    public RoleEntity getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEntity role) {
         this.role = role;
     }
 }
