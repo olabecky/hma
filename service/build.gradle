@@ -6,7 +6,9 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-jpa'
 	implementation 'org.springframework.boot:spring-boot'
 	implementation 'org.springframework.boot:spring-boot-autoconfigure'
-	implementation 'com.h2database:h2:'
+//	implementation 'com.h2database:h2:'
+	implementation 'mysql:mysql-connector-java'
+
 	implementation 'org.hibernate:hibernate-core'
 
 	testImplementation 'org.springframework:spring-test'

@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class PatientEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SEQ_PATIENT")
-    @SequenceGenerator(name = "SEQ_PATIENT", sequenceName = "SEQ_PATIENT", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String lastname;
