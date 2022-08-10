@@ -24,13 +24,25 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/patients">Patients</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Patients
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/patients">Patients Creation</a>
+                        <a class="dropdown-item" href="/roles">Prescription</a>
+                        <a class="dropdown-item" href="/users">Appointment</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Laboratory Results</a>
+                        <a class="dropdown-item" href="#">Bulk Upload</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Settings
+                        Admin
                     </a>
+
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/roles">Roles</a>
                         <a class="dropdown-item" href="/users">Users</a>
