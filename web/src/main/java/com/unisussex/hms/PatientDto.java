@@ -1,8 +1,11 @@
 package com.unisussex.hms;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+import java.util.Date;
 
 @JsonDeserialize(builder = PatientDto.Builder.class)
 public class PatientDto {
@@ -10,9 +13,10 @@ public class PatientDto {
     private final String firstname;
     private final String lastname;
     private final String email;
-
     private final String address;
     public final String phoneNumber;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private final Date registrationDate;
 
     public PatientDto(Builder builder) {
         this.id = builder.id;
@@ -21,6 +25,7 @@ public class PatientDto {
         this.email = builder.email;
         this.address = builder.address;
         this.phoneNumber = builder.phoneNumber;
+        this.registrationDate = builder.registrationDate;
     }
 
     public Long getId() {
@@ -42,6 +47,10 @@ public class PatientDto {
     public String getAddress() { return address;}
     public String getPhoneNumber(){return  phoneNumber;}
 
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
     public static Builder aPatientDto() {
         return new Builder();
     }
@@ -55,7 +64,7 @@ public class PatientDto {
         private String email;
         private String address;
         private String phoneNumber;
-
+        private Date registrationDate;
         private Builder() {
         }
 
@@ -89,6 +98,11 @@ public class PatientDto {
             return this;
         }
 
+        public Builder registrationDate(Date registrationDate) {
+            this.registrationDate = registrationDate;
+            return this;
+        }
+
         public PatientDto build() {
             return new PatientDto(this);
         }
@@ -103,6 +117,7 @@ public class PatientDto {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", registrationDate=" + registrationDate +
                 '}';
     }
 }

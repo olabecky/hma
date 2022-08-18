@@ -41,4 +41,11 @@ public class NavigationController {
         logger.info("redirecting to patients...");
         return "patient";
     }
+
+    @GetMapping("/appointments")
+    public String appointments(HttpSession session, Model model) {
+        logger.info("In appointments controller...");
+        logger.info("redirecting to appointments...");
+        return "appointment";
+    }
 }

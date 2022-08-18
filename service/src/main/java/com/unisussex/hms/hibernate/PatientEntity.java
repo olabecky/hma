@@ -1,6 +1,7 @@
 package com.unisussex.hms.hibernate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "PATIENT")
@@ -12,11 +13,16 @@ public class PatientEntity {
     private String firstname;
     private String lastname;
     private String email;
-
     private String address;
     private String phoneNumber;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registrationDate;
 
     public PatientEntity() {
+    }
+
+    public PatientEntity(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -65,5 +71,12 @@ public class PatientEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

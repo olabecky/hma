@@ -13,6 +13,7 @@ public class EntityPatientConverter {
                 .email(entity.getEmail())
                 .phoneNumber(entity.getPhoneNumber())
                 .address(entity.getAddress())
+                .registrationDate(entity.getRegistrationDate())
                 .build();
     }
 
@@ -24,6 +25,7 @@ public class EntityPatientConverter {
         patientEntity.setEmail(patient.getEmail());
         patientEntity.setPhoneNumber(patient.getPhoneNumber());
         patientEntity.setAddress(patient.getAddress());
+        patientEntity.setRegistrationDate(patient.getRegistrationDate());
 
         return patientEntity;
     }

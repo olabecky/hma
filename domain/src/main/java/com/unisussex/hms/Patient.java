@@ -1,5 +1,9 @@
 package com.unisussex.hms;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class Patient {
     private final Long id;
     private final String firstname;
@@ -9,6 +13,8 @@ public class Patient {
     private final String address;
     private final String phoneNumber;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private final Date registrationDate;
 
     public Patient(Builder builder) {
         this.id = builder.id;
@@ -17,6 +23,7 @@ public class Patient {
         this.email = builder.email;
         this.address = builder.address;
         this.phoneNumber = builder.phoneNumber;
+        this.registrationDate = builder.registrationDate;
     }
 
     public Long getId() {
@@ -38,7 +45,9 @@ public class Patient {
     public String getAddress(){return address;};
 
     public String getPhoneNumber(){return phoneNumber;}
-
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
     public static Builder aPatient() {
         return new Builder();
     }
@@ -50,6 +59,7 @@ public class Patient {
         private String email;
         private String address;
         private String phoneNumber;
+        private Date registrationDate;
 
         private Builder() {
         }
@@ -83,7 +93,10 @@ public class Patient {
             this.phoneNumber = phoneNumber;
             return this;
         }
-
+        public Builder registrationDate(Date registrationDate) {
+            this.registrationDate = registrationDate;
+            return this;
+        }
 
         public Patient build() {
             return new Patient(this);

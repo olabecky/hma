@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class PatientController {
     }
 
     @GetMapping("/patientSearch")
-    public List<PatientDto> getPatientByParam(@RequestParam(name = "param") String param) {
+    public List<PatientDto> getPatientByParam(@RequestParam(name = "param", required = false) String param) {
         System.out.println(":::::::::param::::::: "+param);
         if (Strings.isBlank(param)) {
             return this.patientService.getAllPatients().stream()
@@ -83,6 +84,7 @@ public class PatientController {
                 .email(patientDto.getEmail())
                 .phoneNumber(patientDto.getPhoneNumber())
                 .address(patientDto.getAddress())
+                .registrationDate(patientDto.getRegistrationDate() == null? new Date() : patientDto.getRegistrationDate())
                 .build());
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -119,6 +121,7 @@ public class PatientController {
                 .email(patient.getEmail())
                 .phoneNumber(patient.getPhoneNumber())
                 .address(patient.getAddress())
+                .registrationDate(patient.getRegistrationDate())
                 .build());
 
         return ResponseEntity.status(HttpStatus.OK)
@@ -138,6 +141,7 @@ public class PatientController {
                 .lastname(patient.getLastname())
                 .email(patient.getEmail())
                 .phoneNumber(patient.getPhoneNumber())
+                .registrationDate(patient.getRegistrationDate())
                 .address(patient.getAddress())
                 .build();
     }
