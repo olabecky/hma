@@ -1,7 +1,6 @@
 package com.unisussex.hms;
 
 import com.unisussex.hms.hibernate.RoleDao;
-import com.unisussex.hms.hibernate.RoleEntity;
 import com.unisussex.hms.hibernate.UserDao;
 import com.unisussex.hms.hibernate.UserEntity;
 import com.unisussex.hms.hibernate.enums.UserStatus;

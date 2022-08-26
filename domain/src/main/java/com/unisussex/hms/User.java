@@ -2,6 +2,10 @@
 package com.unisussex.hms;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class User {
     private final Long id;
     private final String username;
@@ -9,6 +13,7 @@ public class User {
     private final String password;
     private final boolean mustChangePassword;
     private final String userStatus;
+    private final Date lastLoginDate;
 
     private User(Builder builder) {
         this.id = builder.id;
@@ -17,6 +22,7 @@ public class User {
         this.password = builder.password;
         this.mustChangePassword = builder.mustChangePassword;
         this.userStatus = builder.userStatus;
+        this.lastLoginDate = builder.lastLoginDate;
     }
 
     public Long getId() {
@@ -41,6 +47,9 @@ public class User {
     public String getUserStatus() {
         return userStatus;
     }
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
 
     public static Builder aUser() {
         return new Builder();
@@ -50,11 +59,10 @@ public class User {
         private Long id;
         private String username;
         private Role role;
-
         private String password;
-
         private boolean mustChangePassword;
         private String userStatus;
+        private Date lastLoginDate;
 
         private Builder() {
         }
@@ -86,6 +94,11 @@ public class User {
 
         public Builder userStatus(String userStatus) {
             this.userStatus = userStatus;
+            return this;
+        }
+
+        public Builder lastLoginDate(Date lastLoginDate) {
+            this.lastLoginDate = lastLoginDate;
             return this;
         }
 

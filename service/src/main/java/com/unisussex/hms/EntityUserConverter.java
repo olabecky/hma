@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EntityUserConverter {
     public User convert(UserEntity entity) {
-        System.out.println(entity);
         return User.aUser()
                 .id(entity.getId())
                 .username(entity.getUsername())
