@@ -1,9 +1,11 @@
 package com.unisussex.hms.hibernate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.unisussex.hms.hibernate.enums.UserStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "USER")
@@ -20,6 +22,9 @@ public class UserEntity {
     private boolean mustChangePassword;
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date lastLoginDate;
 
     public UserEntity() {
     }
@@ -72,6 +77,14 @@ public class UserEntity {
         return this;
     }
 
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -81,6 +94,7 @@ public class UserEntity {
                 ", role=" + role +
                 ", mustChangePassword=" + mustChangePassword +
                 ", userStatus=" + userStatus +
+                ", lastLoginDate=" + lastLoginDate +
                 '}';
     }
 }

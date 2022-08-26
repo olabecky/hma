@@ -1,6 +1,7 @@
 package com.unisussex.hms;
 
 import com.unisussex.hms.exception.ResourceNotFoundException;
+import com.unisussex.hms.util.Util;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,7 +81,7 @@ public class UserController {
 		User createdUser = this.userService.saveUser(User.aUser()
 				.id(userDto.getId())
 				.username(userDto.getUsername())
-				.password(userDto.getPassword())
+				.password(Util.hash(userDto.getPassword()))
 				.role(Role.aRole().id(userDto.getRoleId()).build())
 				.mustChangePassword(true)
 				.userStatus(userDto.getUserStatus())
