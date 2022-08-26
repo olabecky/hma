@@ -4,6 +4,7 @@ import com.unisussex.hms.hibernate.RoleDao;
 import com.unisussex.hms.hibernate.RoleEntity;
 import com.unisussex.hms.hibernate.UserDao;
 import com.unisussex.hms.hibernate.UserEntity;
+import com.unisussex.hms.hibernate.enums.UserStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public class UserServiceImpl implements UserService {
             UserEntity entityInDB = userEntity.get();
             entityInDB.setUsername(user.getUsername());
             entityInDB.setRole(roleDao.findById(user.getRole().getId()).get());
+            entityInDB.setUserStatus(UserStatus.valueOf(user.getUserStatus()));
 
             entityInDB = userDao.save(entityInDB);
 

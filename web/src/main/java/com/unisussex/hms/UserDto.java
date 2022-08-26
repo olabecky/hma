@@ -10,12 +10,20 @@ public class UserDto {
     private final String username;
     private final Role role;
     private final Long roleId;
+    private final String password;
+    private final String repeatPassword;
+    private final boolean mustChangePassword;
+    private final String userStatus;
 
     public UserDto(Builder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.role = builder.role;
         this.roleId = builder.roleId;
+        this.password = builder.password;
+        this.repeatPassword = builder.repeatPassword;
+        this.mustChangePassword = builder.mustChangePassword;
+        this.userStatus = builder.userStatus;
     }
 
     public Long getId() {
@@ -33,6 +41,19 @@ public class UserDto {
     public Long getRoleId() {
         return roleId;
     }
+    public String getPassword() {
+        return password;
+    }
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+    public boolean isMustChangePassword() {
+        return mustChangePassword;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
 
     public static Builder aUserDto() {
         return new Builder();
@@ -46,6 +67,13 @@ public class UserDto {
         private String username;
         private Role role;
         private Long roleId;
+
+        private String password;
+
+        private String repeatPassword;
+
+        private boolean mustChangePassword;
+        private String userStatus;
 
         private Builder() {
         }
@@ -67,18 +95,30 @@ public class UserDto {
             return this;
         }
 
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder repeatPassword(String repeatPassword) {
+            this.repeatPassword = repeatPassword;
+            return this;
+        }
+
+        public Builder mustChangePassword(boolean mustChangePassword) {
+            this.mustChangePassword = mustChangePassword;
+            return this;
+        }
+
+        public Builder userStatus(String userStatus) {
+            this.userStatus = userStatus;
+            return this;
+        }
+
         public UserDto build() {
             return new UserDto(this);
         }
     }
 
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", role=" + role +
-                ", roleId=" + roleId +
-                '}';
-    }
+
 }

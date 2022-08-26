@@ -1,10 +1,9 @@
 (() => {
     document.addEventListener("DOMContentLoaded", () => {
+        showLabResults('labResults');
 
-        showUsers('user');
-
-        function showUsers(path) {
-            fetch(path)
+        function showLabResults(path) {
+                fetch(path)
                 .then( function(response) {
                     response.json().then(function(data) {
                         if (response.status === 200) {
@@ -22,21 +21,21 @@
             var errorElement = document.getElementById('errorMessage')
             var param = document.getElementById('search').value
             errorElement.innerHTML = '';
-            var path = 'userSearch?param='+param;
-            showUsers(path);
+            var path = 'labResultSearch?param='+param;
+            showLabResults(path);
         })
 
         document.getElementById('submit-form').addEventListener("click", () => {
-            var form = document.getElementById('addUser')
+            var form = document.getElementById('addLabResult')
             var errorElement = document.getElementById('errorMessage')
             errorElement.innerHTML = '';
-            fetch('user', {
+            fetch('labResults', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(getFormContentAsObject('addUser')),
+                body: JSON.stringify(getFormContentAsObject('addLabResult')),
             })
                 .then(function (response) {
                     response.json()
@@ -47,16 +46,16 @@
                             }else{
                                 form.reset();
                             }
-                            showUsers('user');
+                            showLabResults('labResults');
                         }).catch(function (error) {
                         var errorElement = document.getElementById('errorMessage')
-                        showUsers('user');
+                        showLabResults('labResults');
                         errorElement.innerHTML = `<div>Error occurred: ${error}</div>`;
                     });
                 })
                 .catch(function (error) {
                     var errorElement = document.getElementById('errorMessage')
-                    showUsers('user');
+                    showLabResults('labResults');
                     errorElement.innerHTML = `<div>Request failed: ${error}</div>`;
                 });
         })
@@ -72,37 +71,34 @@
         }
 
         function updateTable(data) {
-            var table = document.getElementById('allUsers')
-            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Username</th><th scope=\"col\">Status</th><th scope=\"col\">Role</th><th scope=\"col\">Must Change Password</th></tr></thead>"
+            var table = document.getElementById('allLabResults')
+            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Firstname</th><th scope=\"col\">Lastname</th><th scope=\"col\">Result Description</th><th scope=\"col\">Diagnosis Date</th></tr></thead>"
             let sn = 1;
             data.forEach(element => {
-            let mustChangePassword = element.mustChangePassword ? 'YES':'NO';
-                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.username}</td><td>${element.userStatus}</td><td>${element.role.name}</td><td>${element.mustChangePassword}</td></tr>`;
+                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.patient.firstname}</td><td>${element.patient.lastname}</td><td>${element.diagnosisDescription}</td><td>${element.diagnosisDate}</td></tr>`;
                 sn++;
             });
             table.innerHTML = rows;
         }
 
-        function loadRoles(path) {
-             fetch(path)
-                 .then( function(response) {
-                     response.json().then(function(data) {
-                         if (response.status === 200) {
-                             let $select = $('#roleId');
-                                 $.each(data, function(i, option) {
-                                     let optionText = option.name;
-                                     let optionValue = option.id;
-                                     $select.append(`<option value="${optionValue}"> ${optionText} </option>`);
-                                 });
-                         } else {
-                             var errorElement = document.getElementById('errorMessage')
-                             errorElement.innerHTML = `<div>Request failed: ${data.message}</div>`;
-                         }
-                 })
+        function loadPatients(path) {
+        fetch(path)
+             .then( function(response) {
+                 response.json().then(function(data) {
+                     if (response.status === 200) {
+                         let $select = $('#patientId');
+                         $.each(data, function(i, option) {
+                             let optionText = option.firstname + ' ' + option.lastname;
+                             let optionValue = option.id;
+                             $select.append(`<option value="${optionValue}"> ${optionText} </option>`);
+                         });
+                     } else {
+                         var errorElement = document.getElementById('errorMessage')
+                         errorElement.innerHTML = `<div>Request failed: ${data.message}</div>`;
+                     }
              })
-         }
-         loadRoles('role');
-
-//        $(".select2").select2();
+         })
+     }
+     loadPatients('patientSearch');
     });
 })();

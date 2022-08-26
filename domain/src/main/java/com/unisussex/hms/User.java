@@ -6,11 +6,17 @@ public class User {
     private final Long id;
     private final String username;
     private final Role role;
+    private final String password;
+    private final boolean mustChangePassword;
+    private final String userStatus;
 
     private User(Builder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.role = builder.role;
+        this.password = builder.password;
+        this.mustChangePassword = builder.mustChangePassword;
+        this.userStatus = builder.userStatus;
     }
 
     public Long getId() {
@@ -25,6 +31,17 @@ public class User {
         return role;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isMustChangePassword() {
+        return mustChangePassword;
+    }
+    public String getUserStatus() {
+        return userStatus;
+    }
+
     public static Builder aUser() {
         return new Builder();
     }
@@ -33,6 +50,11 @@ public class User {
         private Long id;
         private String username;
         private Role role;
+
+        private String password;
+
+        private boolean mustChangePassword;
+        private String userStatus;
 
         private Builder() {
         }
@@ -47,8 +69,23 @@ public class User {
             return this;
         }
 
+        public Builder password (String password) {
+            this.password = password;
+            return this;
+        }
+
         public Builder role(Role role) {
             this.role = role;
+            return this;
+        }
+
+        public Builder mustChangePassword(boolean mustChangePassword) {
+            this.mustChangePassword = mustChangePassword;
+            return this;
+        }
+
+        public Builder userStatus(String userStatus) {
+            this.userStatus = userStatus;
             return this;
         }
 

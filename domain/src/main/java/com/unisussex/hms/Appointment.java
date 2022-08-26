@@ -72,5 +72,7 @@ public class Appointment {
         public Appointment build() {
             return new Appointment(this);
         }
+
+
     }
 }

@@ -28,14 +28,6 @@ public class AppointmentController {
                 .collect(Collectors.toList());
     }
 
-    /*@GetMapping("/appointment/{email}")
-    public AppointmentDto getAppointmentByEmail(@PathVariable("email") String email) {
-        System.out.println(":::::::::email::::::: "+email);
-        return this.appointmentService.getAppointmentByEmail(email)
-                .map(this::convert)
-                .orElseThrow(() -> new ResourceNotFoundException("Not Appointment with email '" + email + "'"));
-    }*/
-
     @GetMapping("/appointmentSearch")
     public List<AppointmentDto> getAppointmentByParam(@RequestParam(name = "param") String param) {
         System.out.println(":::::::::param::::::: "+param);

@@ -48,4 +48,10 @@ public class NavigationController {
         logger.info("redirecting to appointments...");
         return "appointment";
     }
+    @GetMapping("/labresults")
+    public String Results(HttpSession session, Model model) {
+        logger.info("In results controller...");
+        logger.info("redirecting to results...");
+        return "labresult";
+    }
 }

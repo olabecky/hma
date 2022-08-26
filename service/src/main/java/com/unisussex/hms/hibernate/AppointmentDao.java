@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public interface AppointmentDao extends JpaRepository<AppointmentEntity, Long> {
 
-    @Query("SELECT e FROM AppointmentEntity e WHERE lower(e.patient.id) = :patientId " +
-            "and lower(e.appointmentDate) = :appointmentDate")
+    @Query("SELECT e FROM AppointmentEntity e WHERE e.patient.id = :patientId " +
+            "and e.appointmentDate = :appointmentDate")
     Optional<AppointmentEntity> findByPatientIdAndDate(@Param("patientId") Long patientId, @Param("appointmentDate") Date appointmentDate);
 
     @Query("SELECT e FROM AppointmentEntity e WHERE lower(e.patient.email) like :param " +

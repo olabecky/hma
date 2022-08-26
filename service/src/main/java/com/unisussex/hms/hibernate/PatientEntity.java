@@ -3,6 +3,9 @@ package com.unisussex.hms.hibernate;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+     @Author Rebecca
+*/
 @Entity
 @Table(name = "PATIENT")
 public class PatientEntity {
