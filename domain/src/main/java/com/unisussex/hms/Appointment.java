@@ -10,6 +10,7 @@ public class Appointment {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final Date appointmentDate;
     private final Patient patient;
+    private final String status;
 
 
     public Appointment(Builder builder) {
@@ -17,6 +18,7 @@ public class Appointment {
         this.appointmentDescription = builder.appointmentDescription;
         this.appointmentDate = builder.appointmentDate;
         this.patient = builder.patient;
+        this.status = builder.status;
 
     }
 
@@ -36,6 +38,10 @@ public class Appointment {
         return patient;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public static Builder aAppointment() {
         return new Builder();
     }
@@ -45,6 +51,7 @@ public class Appointment {
         private String appointmentDescription;
         private Date appointmentDate;
         private  Patient patient;
+        private String status;
 
 
         private Builder() {
@@ -68,11 +75,13 @@ public class Appointment {
             this.patient = patient;
             return this;
         }
-
+        public Builder status(String status) {
+            this.status = status;
+            return this;
+        }
         public Appointment build() {
             return new Appointment(this);
         }
-
 
     }
 }

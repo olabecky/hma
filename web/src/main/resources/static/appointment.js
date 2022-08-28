@@ -72,10 +72,10 @@
 
         function updateTable(data) {
             var table = document.getElementById('allAppointments')
-            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Firstname</th><th scope=\"col\">Lastname</th><th scope=\"col\">Appointment Description</th><th scope=\"col\">Appointment Date</th></tr></thead>"
+            var rows = "<thead><tr><th scope=\"col\">#</th><th scope=\"col\">Firstname</th><th scope=\"col\">Lastname</th><th scope=\"col\">Description</th><th scope=\"col\">Status</th><th scope=\"col\">Appointment Date</th></tr></thead>"
             let sn = 1;
             data.forEach(element => {
-                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.patient.firstname}</td><td>${element.patient.lastname}</td><td>${element.appointmentDescription}</td><td>${element.appointmentDate}</td></tr>`;
+                rows += `<tr><th scope=\"row\">${sn}</th><td>${element.patient.firstname}</td><td>${element.patient.lastname}</td><td>${element.appointmentDescription}</td><td>${element.status}</td><td>${element.appointmentDate}</td></tr>`;
                 sn++;
             });
             table.innerHTML = rows;

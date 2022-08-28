@@ -1,6 +1,8 @@
 package com.unisussex.hms.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.unisussex.hms.hibernate.enums.AppointmentStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,6 +20,9 @@ public class AppointmentEntity {
 	@ManyToOne
 	@JoinColumn(name = "patient", referencedColumnName = "id")
 	private PatientEntity patient;
+
+	@Enumerated(EnumType.STRING)
+	private AppointmentStatus status;
 
 	public AppointmentEntity() {
 	}
@@ -56,6 +61,15 @@ public class AppointmentEntity {
 
 	public AppointmentEntity setPatient(PatientEntity patient) {
 		this.patient = patient;
+		return this;
+	}
+
+	public AppointmentStatus getStatus() {
+		return status;
+	}
+
+	public AppointmentEntity setStatus(AppointmentStatus status) {
+		this.status = status;
 		return this;
 	}
 }

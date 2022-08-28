@@ -3,6 +3,7 @@ package com.unisussex.hms;
 import com.unisussex.hms.hibernate.AppointmentDao;
 import com.unisussex.hms.hibernate.AppointmentEntity;
 import com.unisussex.hms.hibernate.PatientDao;
+import com.unisussex.hms.hibernate.enums.AppointmentStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -72,6 +73,7 @@ public class AppointmentServiceImpl implements AppointmentService{
             entityInDB.setAppointmentDescription(appointment.getAppointmentDescription());
             entityInDB.setAppointmentDate(appointment.getAppointmentDate());
             entityInDB.setPatient(patientDao.findById(appointment.getPatient().getId()).get());
+            entityInDB.setStatus(AppointmentStatus.valueOf(appointment.getStatus()));
             entityInDB = appointmentDao.save(entityInDB);
 
             return entityAppointmentConverter.convert(entityInDB);

@@ -2,6 +2,7 @@ package com.unisussex.hms;
 
 import com.unisussex.hms.hibernate.AppointmentEntity;
 import com.unisussex.hms.hibernate.PatientEntity;
+import com.unisussex.hms.hibernate.enums.AppointmentStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +21,7 @@ public class EntityAppointmentConverter {
                         .firstname(entity.getPatient().getFirstname())
                         .registrationDate(entity.getPatient().getRegistrationDate())
                         .build())
+                .status(entity.getStatus().name())
                 .build();
     }
 
@@ -29,6 +31,7 @@ public class EntityAppointmentConverter {
         appointmentEntity.setAppointmentDescription(appointment.getAppointmentDescription());
         appointmentEntity.setAppointmentDate(appointment.getAppointmentDate());
         appointmentEntity.setPatient(new PatientEntity(appointment.getPatient().getId()));
+        appointmentEntity.setStatus(AppointmentStatus.valueOf(appointment.getStatus()));
 
         return appointmentEntity;
     }

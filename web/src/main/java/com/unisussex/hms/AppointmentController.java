@@ -64,7 +64,8 @@ public class AppointmentController {
                 .id(appointmentDto.getId())
                 .appointmentDescription(appointmentDto.getAppointmentDescription())
                 .appointmentDate(appointmentDto.getAppointmentDate())
-                .patient(Patient.aPatient().id(appointmentDto.getPatientId()).build() )
+                .patient(Patient.aPatient().id(appointmentDto.getPatientId()).build())
+                .status("PENDING")
                 .build());
 
         return ResponseEntity.status(HttpStatus.CREATED)
