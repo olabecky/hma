@@ -15,6 +15,7 @@ public interface PatientDao extends JpaRepository<PatientEntity, Long> {
             " or lower(e.lastname) like :param" +
             " or lower(e.email) like :param "+
             "or lower(e.address) like :param "+
+            "or lower(e.postCode) like :param "+
             "or lower(e.phoneNumber) like :param")
     List<PatientEntity> findByParam(@Param("param") String param);
 }

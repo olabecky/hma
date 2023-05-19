@@ -18,6 +18,8 @@ public class PatientEntity {
     private String email;
     private String address;
     private String phoneNumber;
+
+    private String postCode;
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
 
@@ -62,6 +64,14 @@ public class PatientEntity {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+    public PatientEntity setPostCode(String postCode) {
+        this.postCode = postCode;
+        return this;
     }
 
     public void setAddress(String address) {

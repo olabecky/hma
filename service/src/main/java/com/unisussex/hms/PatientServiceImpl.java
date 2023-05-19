@@ -66,6 +66,7 @@ public class PatientServiceImpl implements PatientService{
             entityInDB.setEmail(patient.getEmail());
             entityInDB.setPhoneNumber(patient.getPhoneNumber());
             entityInDB.setAddress(patient.getAddress());
+            entityInDB.setPostCode(patient.getPostCode());
 
             entityInDB = patientDao.save(entityInDB);
 

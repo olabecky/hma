@@ -1,0 +1,28 @@
+version: "2"
+services:
+  webapp:
+    build: web
+    working_dir: /hospital-management-platform
+    image: gradle:7.6-jdk17
+    ports:
+      - "8081:8081"
+    command: gradle bootRun
+    volumes:
+      - ./:/hospital-management-platform
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://hospital-service-app:3306/hms_app_db?createDatabaseIfNotExist=true
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: hms_app_db
+      MYSQL_DB: hms_app_db
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - hospital-service-app:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: hms_app_db
+      MYSQL_DATABASE: hms_app_db
+
+volumes:
+  hospital-service-app:

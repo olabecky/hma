@@ -84,6 +84,7 @@ public class PatientController {
                 .email(patientDto.getEmail())
                 .phoneNumber(patientDto.getPhoneNumber())
                 .address(patientDto.getAddress())
+                .postCode(patientDto.getPostCode())
                 .registrationDate(patientDto.getRegistrationDate() == null? new Date() : patientDto.getRegistrationDate())
                 .build());
 
@@ -143,6 +144,7 @@ public class PatientController {
                 .phoneNumber(patient.getPhoneNumber())
                 .registrationDate(patient.getRegistrationDate())
                 .address(patient.getAddress())
+                .postCode(patient.getPostCode())
                 .build();
     }
 

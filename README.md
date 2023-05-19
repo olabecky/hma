@@ -5,7 +5,7 @@
 From the command line, run: `./gradlew application:bootRun` from the project root. Alternatively, from IntelliJ you can open the Gradle sidebar and locate the bootRun task under 
 
 ## Accessing the application
-http://localhost:9992
+http://localhost:9994
 
 From the command line, run: `./gradlew application:bootRun` from the project root. Alternatively, from IntelliJ you can open the Gradle sidebar and locate the bootRun task under
 

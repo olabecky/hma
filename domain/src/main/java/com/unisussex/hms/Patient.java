@@ -12,6 +12,7 @@ public class Patient {
 
     private final String address;
     private final String phoneNumber;
+    private final String postCode;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final Date registrationDate;
@@ -24,6 +25,7 @@ public class Patient {
         this.address = builder.address;
         this.phoneNumber = builder.phoneNumber;
         this.registrationDate = builder.registrationDate;
+        this.postCode = builder.postCode;
     }
 
     public Long getId() {
@@ -48,6 +50,11 @@ public class Patient {
     public Date getRegistrationDate() {
         return registrationDate;
     }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
     public static Builder aPatient() {
         return new Builder();
     }
@@ -60,6 +67,7 @@ public class Patient {
         private String address;
         private String phoneNumber;
         private Date registrationDate;
+        private String postCode;
 
         private Builder() {
         }
@@ -95,6 +103,11 @@ public class Patient {
         }
         public Builder registrationDate(Date registrationDate) {
             this.registrationDate = registrationDate;
+            return this;
+        }
+
+        public Builder postCode(String postCode) {
+            this.postCode = postCode;
             return this;
         }
 
