@@ -35,7 +35,7 @@ public class AuthenticationServiceFacadeImpl implements AuthenticationServiceFac
             throw new IllegalArgumentException("User profile is inactive");
         }
         if(!Objects.equals(userOp.get().getPassword(), password)){
-            logger.info("Passwords do not match");
+            logger.info("Passwords {} and {} not match", userOp.get().getPassword(), password);
             throw new IllegalArgumentException("Authentication failed, Invalid username password combination");
         }
         User user = userOp.get();
